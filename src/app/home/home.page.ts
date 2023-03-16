@@ -25,6 +25,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.tasks = this.db.getTasklist();
+    console.log(this.tasks);
   }
 
   async showModal() {

@@ -20,7 +20,8 @@ export class StorageService {
     const oTask = {
       task: objTask.task,
       priority: objTask.priority,
-      status: objTask. status
+      status: objTask.status,
+      date: objTask.date
     };
     this.tasks.unshift(oTask);
     localStorage.setItem('tasks', JSON.stringify(this.tasks));

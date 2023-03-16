@@ -34,6 +34,7 @@
           <ion-label>
             <h2 [ngClass]="t.status">{{t.task}}</h2>
             <p *ngIf="t.status !== 'done'" [ngClass]="t.priority">{{t.priority}}</p>
+            <p *ngIf="t.status !== 'done'">{{t.date}}</p>
             <p *ngIf="t.status === 'done'">Task completed</p>
           </ion-label>
           <ion-toggle checked="{{ (t.status === 'pending') ? true : false }}"

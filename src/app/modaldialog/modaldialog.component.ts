@@ -25,7 +25,8 @@ export class ModaldialogComponent implements OnInit {
   ngOnInit() {
     this.taskForm = this.fb.group({
       task: ['', Validators.required],
-      priority: ['', Validators.required]
+      priority: ['', Validators.required],
+      date: ['', Validators.required]
     });
 
     if (this.taskId > -1) {
@@ -33,15 +34,18 @@ export class ModaldialogComponent implements OnInit {
       this.pgTitle = 'Edit';
       this.taskForm.get('task').setValue(this.otask.task);
       this.taskForm.get('priority').setValue(this.otask.priority);
+      this.taskForm.get('date').setValue(this.otask.date);
     } else {
       this.pgTitle = 'Add';
     }
   }
 
   submitForm(objFrm: any): void {
+    const dateFormatted = this.convertDateTime(objFrm.date)
     const objTask = {
       task: objFrm.task,
       priority: objFrm.priority,
+      date: dateFormatted,
       status: (this.taskId > -1) ? this.otask.status : 'pending'
     };
     (this.taskId > -1) ? this.db.editTask(this.taskId, objTask) : this.db.addTask(objTask);
@@ -59,6 +63,19 @@ export class ModaldialogComponent implements OnInit {
 
   dismiss() {
     this.modalCtrl.dismiss();
+  }
+
+  convertDateTime(dateStr: string) {
+    const date = new Date(dateStr);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const amOrPm = hours >= 12 ? 'PM' : 'AM';
+    const hours12 = hours % 12 || 12;
+    const formattedDate = `${day}/${month}/${year} ${hours12}:${minutes} ${amOrPm}`;
+    return formattedDate;
   }
 
 }
