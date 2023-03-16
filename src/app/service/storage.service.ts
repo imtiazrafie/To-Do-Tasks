@@ -35,6 +35,7 @@ export class StorageService {
     const task = this.tasks.find((currentValue: any, index: number) => index === idx);
     task.task = objTask.task;
     task.priority = objTask.priority;
+    task.date = objTask.date;
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
 

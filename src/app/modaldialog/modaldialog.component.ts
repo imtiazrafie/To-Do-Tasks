@@ -74,7 +74,7 @@ export class ModaldialogComponent implements OnInit {
     const minutes = date.getMinutes();
     const amOrPm = hours >= 12 ? 'PM' : 'AM';
     const hours12 = hours % 12 || 12;
-    const formattedDate = `${day}/${month}/${year} ${hours12}:${minutes} ${amOrPm}`;
+    const formattedDate = `${day}/${month}/${year}`;
     return formattedDate;
   }
 
