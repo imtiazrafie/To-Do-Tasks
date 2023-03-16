@@ -1,0 +1,57 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="secondary">
+      <ion-button routerLink="/about">
+        <ion-icon slot="icon-only" name="information-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>ToDosHub</ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button (click)="showModal()">
+        <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngIf="!tasks.length">
+      <ion-label>
+        <p style="text-align: center;"><i>“Once you have commitment, you need the <br> discipline and hard work to get
+            you there.”</i><br>– Haile Gebrselassie</p><br>
+        <h2 style="text-align: center;">No Task Created</h2>
+        <p style="text-align: center;" (click)="showModal()">Click <ion-icon name="add-circle-outline"></ion-icon> to
+          add new task.</p>
+      </ion-label>
+    </ion-item>
+    <ion-reorder-group (ionItemReorder)="reorderList($event)" disabled="false">
+      <ion-item-sliding *ngFor="let t of tasks; let idx = index" id="slidingItem" reorder="true">
+        <ion-item>
+          <ion-label>
+            <h2 [ngClass]="t.status">{{t.task}}</h2>
+            <p *ngIf="t.status !== 'done'" [ngClass]="t.priority">{{t.priority}}</p>
+            <p *ngIf="t.status === 'done'">Task completed</p>
+          </ion-label>
+          <ion-toggle checked="{{ (t.status === 'pending') ? true : false }}"
+            (ionChange)="changeStatus(idx, t.status)"></ion-toggle>
+          <ion-reorder slot="end" class="ios hydrated"></ion-reorder>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option expandable (click)="updateTask(idx)">
+            <ion-icon slot="start" name="create-outline"></ion-icon>
+            Edit
+          </ion-item-option>
+          <ion-item-option color="danger" expandable (click)="removeTask(idx)">
+            <ion-icon slot="start" name="trash-outline"></ion-icon>
+            Delete
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-reorder-group>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,43 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-title>{{ pgTitle }} Task</ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button (click)="dismiss()">Cancel</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="taskForm" (ngSubmit)="submitForm(taskForm.value)">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked" *ngIf="taskForm.get('task').untouched || taskForm.get('task').valid">Task</ion-label>
+        <ion-label position="stacked" color="danger" *ngIf="taskForm.get('task').touched && taskForm.get('task').errors?.required">Task (required)</ion-label>
+        <ion-input clearInput type="text" placeholder="Enter task" maxlength="50" formControlName="task"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label *ngIf="taskForm.get('priority').untouched || taskForm.get('priority').valid">Priority</ion-label>
+        <ion-label color="danger"
+          *ngIf="taskForm.get('priority').touched && taskForm.get('priority').errors?.required">Priority
+          (required)</ion-label>
+        <ion-select interface="action-sheet" formControlName="priority" placeholder="Select">
+          <ion-select-option value="high">High</ion-select-option>
+          <ion-select-option value="normal">Normal</ion-select-option>
+          <ion-select-option value="low">Low</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" *ngIf="taskForm.get('task').untouched || taskForm.get('task').valid">Date</ion-label>
+        <ion-label position="stacked" color="danger" *ngIf="taskForm.get('task').touched && taskForm.get('task').errors?.required">Date (required)</ion-label>
+        <ion-datetime formControlName="date"></ion-datetime>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" class="ion-no-margin" [disabled]="!taskForm.valid">Save</ion-button>
+    </div>
+  </form>
+</ion-content>
