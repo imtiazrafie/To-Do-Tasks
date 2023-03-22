@@ -1,13 +1,11 @@
 <ion-header translucent>
   <ion-toolbar color="primary">
-    <ion-buttons slot="secondary">
-      <ion-button routerLink="/about">
-        <ion-icon slot="icon-only" name="information-circle"></ion-icon>
-      </ion-button>
+
+    <ion-title style="text-align: center;">ToDosHub</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
-
-    <ion-title>ToDosHub</ion-title>
-
     <ion-buttons slot="primary">
       <ion-button (click)="showModal()">
         <ion-icon slot="icon-only" name="add-circle"></ion-icon>
