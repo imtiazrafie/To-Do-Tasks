@@ -77,4 +77,9 @@ export class HomePage implements OnInit {
     return this.datePipe.transform(date, format);
   }
 
+  shareToWhatsapp(idx: any) {
+    const taskdata = this.db.getTask(idx);
+    const textwhatsapp = "📌 Task details 📌 %0aTask Name: " + taskdata.task + "%0aPriority Level: " + taskdata.priority + "%0aStatus: " + taskdata.status + "%0aDate: " + taskdata.date;
+    window.open('whatsapp://send?text=' + textwhatsapp);
+  }
 }

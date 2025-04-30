@@ -1,8 +1,6 @@
 <ion-header translucent>
-  <ion-toolbar color="primary">
-
+  <ion-toolbar>
     <ion-title style="text-align: center;">ToDosHub</ion-title>
-
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
@@ -22,7 +20,7 @@
         <p style="text-align: center;"><i>“Once you have commitment, you need the <br> discipline and hard work to get
             you there.”</i><br>– Haile Gebrselassie</p><br>
         <h2 style="text-align: center;">No Task Created</h2>
-        <p style="text-align: center;" (click)="showModal()">Click <ion-icon name="add-circle-outline"></ion-icon> to
+        <p style="text-align: center;" (click)="showModal()">Click <ion-icon name="add-circle"></ion-icon> to
           add new task.</p>
       </ion-label>
     </ion-item>
@@ -37,6 +35,7 @@
           </ion-label>
           <ion-toggle checked="{{ (t.status === 'pending') ? true : false }}"
             (ionChange)="changeStatus(idx, t.status)"></ion-toggle>
+          <ion-icon name="share-social-outline" (click)="shareToWhatsapp(idx)"></ion-icon>
           <ion-reorder slot="end" class="ios hydrated"></ion-reorder>
         </ion-item>
 
@@ -52,5 +51,8 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-reorder-group>
+    <footer>
+      <p style="text-align: center;" [routerLink]="['/tutorial']">Need help? &nbsp;<ion-icon name="help-circle"></ion-icon></p>
+    </footer>
   </ion-list>
 </ion-content>
